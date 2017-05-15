@@ -1,0 +1,14 @@
+- name: Enable tap caskroom/fonts
+  homebrew_tap:
+    tap: "caskroom/fonts"
+    state: "present"
+
+- name: Install fonts
+  homebrew_cask:
+    name: "font-{{ item }}"
+    state: "present"
+  with_items:
+    - open-sans
+    - roboto
+    - source-code-pro
+  when: skip_installs|default('no') != 'yes'

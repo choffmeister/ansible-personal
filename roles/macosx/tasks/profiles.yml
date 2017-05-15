@@ -1,0 +1,20 @@
+- name: Create mail profile temp file
+  template:
+    src: "mail.mobileconfig.j2"
+    dest: "/tmp/mail.mobileconfig"
+  changed_when: False
+
+- name: Check mail profile existence
+  command: "/usr/bin/profiles -L"
+  register: profile_mail
+  changed_when: False
+
+- name: Install mail profile
+  command: "/usr/bin/profiles -I -F /tmp/mail.mobileconfig"
+  when: "'{{ mail.id }}' not in profile_mail.stdout"
+
+- name: Remove mail profile temp file
+  file:
+    path: "/tmp/mail.mobileconfig"
+    state: "absent"
+  changed_when: False

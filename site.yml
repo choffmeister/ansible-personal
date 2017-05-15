@@ -1,0 +1,7 @@
+- hosts: personal
+  roles:
+    - role: common
+    # TODO: when
+    #- role: linux
+    - role: macosx
+      when: ansible_os_family == "Darwin"

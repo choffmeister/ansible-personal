@@ -1,0 +1,11 @@
+- name: Import gpg public key
+  shell: "echo '{{ pgp.public_key }}' | gpg --import"
+  register: gpg_import_public
+  failed_when: "'failed' in gpg_import_public.stderr"
+  changed_when: "'imported' in gpg_import_public.stderr"
+
+- name: Import gpg private key
+  shell: "echo '{{ pgp.private_key }}' | gpg --import"
+  register: gpg_import_private
+  failed_when: "'failed' in gpg_import_private.stderr"
+  changed_when: "'imported' in gpg_import_private.stderr"

@@ -1,0 +1,16 @@
+- name: Copy ca certificate to temporary location
+  copy:
+    src: "certificates/choffmeister-root-ca.crt"
+    dest: "/tmp/choffmeister-root-ca.crt"
+    mode: "0600"
+  changed_when: False
+
+- name: "Check if ca certificate is already installed"
+  command: "/usr/bin/security verify-cert -c /tmp/choffmeister-root-ca.crt"
+  register: pki_check_ca_root
+  failed_when: "pki_check_ca_root.rc != 0  and not 'CSSMERR_TP_NOT_TRUSTED' in pki_check_ca_root.stderr"
+  changed_when: "'CSSMERR_TP_NOT_TRUSTED' in pki_check_ca_root.stderr"
+
+- name: "Install ca certificate"
+  command: "/usr/bin/security add-trusted-cert -r trustRoot -k ~/Library/Keychains/login.keychain /tmp/choffmeister-root-ca.crt"
+  when: pki_check_ca_root.changed

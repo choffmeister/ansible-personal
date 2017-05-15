@@ -1,0 +1,18 @@
+- name: Set dock to static-only mode
+  action: "osx_defaults domain=com.apple.dock key=static-only value_write=\"-bool TRUE\" value_read=1"
+
+- name: Enable dock auto hide
+  action: "osx_defaults domain=com.apple.dock key=autohide value_write=\"-bool TRUE\" value_read=1"
+
+- name: Set dock auto hide timing
+  action: "osx_defaults domain=com.apple.dock key=autohide-time-modifier value_write=\"-float 1\" value_read=1"
+
+- name: Set keyboard repeat rate
+  action: "osx_defaults domain=NSGlobalDomain key=KeyRepeat value_write=\"-int 1\" value_read=1"
+
+- name: Disable mouse acceleration
+  action: "osx_defaults domain=.GlobalPreferences key=com.apple.mouse.scaling value_write=-1 value_read=-1"
+
+- name: Restart dock
+  command: "killall Dock"
+  changed_when: False

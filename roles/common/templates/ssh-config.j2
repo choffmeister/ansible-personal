@@ -1,0 +1,8 @@
+{% for config in ssh.config %}
+Host {{ config.name }}
+    HostName {{ config.host|default(config.name) }}
+    Port {{ config.port|default(22) }}
+    User {{ config.user|default('root') }}
+    IdentityFile ~/.ssh/id_rsa
+    ForwardAgent {{ 'yes' if config.forward is defined and config.forward == true else 'no' }}
+{% endfor %}

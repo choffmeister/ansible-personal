@@ -1,0 +1,27 @@
+- name: Create ssh folder
+  file:
+    path: "~/.ssh"
+    state: "directory"
+    mode: "0700"
+
+- name: Create ssh config
+  template:
+    src: "ssh-config.j2"
+    dest: "~/.ssh/config"
+    mode: "0644"
+
+- name: Add ssh public key
+  copy:
+    content: "{{ item.public_key }}"
+    dest: "~/.ssh/{{ item.name }}.pub"
+    mode: "0644"
+  with_items: "{{ ssh.ids }}"
+  no_log: true
+
+- name: Add ssh private key
+  copy:
+    content: "{{ item.private_key }}"
+    dest: "~/.ssh/{{ item.name }}"
+    mode: "0600"
+  with_items: "{{ ssh.ids }}"
+  no_log: true

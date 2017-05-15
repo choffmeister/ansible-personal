@@ -1,0 +1,69 @@
+- name: Install java
+  homebrew_cask:
+    name: "java"
+    state: "present"
+
+- name: Install applications from homebrew
+  homebrew:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - bash-completion
+    - git
+    - git-flow-avh
+    - giter8
+    - gradle
+    - maven
+    - node
+    - sbt
+    - scala
+    - ssh-copy-id
+    - tree
+    - wget
+    - zsh
+    - zsh-completions
+    - kubernetes-cli
+  when: skip_installs|default('no') != 'yes'
+
+- name: Install applications from homebrew-cask
+  homebrew_cask:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - 1password
+    - atom
+    - dash
+    - docker
+    - firefox
+    - google-chrome
+    - gpgtools
+    - hipchat
+    - intellij-idea
+    - istat-menus
+    - iterm2
+    - jeromelebel-mongohub
+    - macdown
+    - paw
+    - slack
+    - sourcetree
+    - sublime-text
+    - teamviewer
+    - vagrant
+    - virtualbox
+  when: skip_installs|default('no') != 'yes'
+
+- name: Install applications from npm
+  npm:
+    name: "{{ item }}"
+    state: "present"
+    global: "yes"
+  with_items:
+    - gulp
+  when: skip_installs|default('no') != 'yes'
+
+- name: Install oh-my-zsh
+  git:
+    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
+    dest: "~/.oh-my-zsh"
+    version: "master"
+  when: skip_installs|default('no') != 'yes'

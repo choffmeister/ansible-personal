@@ -1,0 +1,11 @@
+- include: applications-install.yml
+- include: applications-settings.yml
+
+- include: dotfiles.yml
+- include: profiles.yml
+- include: pgp.yml
+- include: pki.yml
+
+- include: fonts.yml
+
+- include: osx.yml

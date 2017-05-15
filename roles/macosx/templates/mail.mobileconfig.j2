@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Inc//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>PayloadUUID</key>
+    <string>{{ (mail.id + '.profile') | to_uuid }}</string>
+    <key>PayloadIdentifier</key>
+    <string>{{ mail.id + '.profile' }}</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadDisplayName</key>
+    <string>{{ mail.sender_address }}</string>
+    <key>PayloadDescription</key>
+    <string>Provides access to E-Mail Account</string>
+
+    <key>PayloadContent</key>
+    <array>
+      <dict>
+        <key>PayloadUUID</key>
+        <string>{{ (mail.id + '.imap') | to_uuid }}</string>
+        <key>PayloadIdentifier</key>
+        <string>{{ mail.id + '.imap' }}</string>
+        <key>PayloadType</key>
+        <string>com.apple.mail.managed</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadDisplayName</key>
+        <string>IMAP {{ mail.sender_address }}</string>
+
+        <key>EmailAccountDescription</key>
+        <string>{{ mail.sender_address }}</string>
+
+        <key>EmailAccountName</key>
+        <string>{{ mail.sender_name }}</string>
+
+        <key>EmailAccountType</key>
+        <string>EmailTypeIMAP</string>
+
+        <key>EmailAddress</key>
+        <string>{{ mail.sender_address }}</string>
+
+        <key>IncomingMailServerAuthentication</key>
+        <string>EmailAuthPassword</string>
+
+        <key>IncomingMailServerHostName</key>
+        <string>{{ mail.hosts.imap }}</string>
+
+        <key>IncomingMailServerUseSSL</key>
+        <true/>
+
+        <key>IncomingMailServerUsername</key>
+        <string>{{ mail.credentials.username }}</string>
+
+        <key>IncomingPassword</key>
+        <string>{{ mail.credentials.password }}</string>
+
+        <key>OutgoingMailServerAuthentication</key>
+        <string>EmailAuthPassword</string>
+
+        <key>OutgoingMailServerHostName</key>
+        <string>{{ mail.hosts.smtp }}</string>
+
+        <key>OutgoingMailServerUseSSL</key>
+        <true/>
+
+        <key>OutgoingMailServerUsername</key>
+        <string>{{ mail.credentials.username }}</string>
+
+        <key>OutgoingPassword</key>
+        <string>{{ mail.credentials.password }}</string>
+
+        <key>SMIMEEnabled</key>
+        <true/>
+
+        <key>SMIMESigningCertificateUUID</key>
+        <string>{{ (mail.id + '.smime-' + mail.smime[0].till) | to_uuid }}</string>
+
+        <key>SMIMEEncryptionCertificateUUID</key>
+        <string>{{ (mail.id + '.smime-' + mail.smime[0].till) | to_uuid }}</string>
+      </dict>
+
+      <dict>
+        <key>PayloadUUID</key>
+        <string>{{ (mail.id + '.carddav') | to_uuid }}</string>
+        <key>PayloadIdentifier</key>
+        <string>{{ mail.id + '.carddav' }}</string>
+        <key>PayloadType</key>
+        <string>com.apple.carddav.account</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadDisplayName</key>
+        <string>CardDAV {{ mail.sender_address }}</string>
+
+        <key>CardDAVAccountDescription</key>
+        <string>{{ mail.sender_address }}</string>
+
+        <key>CardDAVHostName</key>
+        <string>{{ mail.hosts.carddav }}</string>
+
+        <key>CardDAVUsername</key>
+        <string>{{ mail.credentials.username }}</string>
+
+        <key>CardDAVPassword</key>
+        <string>{{ mail.credentials.password }}</string>
+
+        <key>CardDAVUseSSL</key>
+        <true/>
+      </dict>
+
+      <dict>
+        <key>PayloadUUID</key>
+        <string>{{ (mail.id + '.caldav') | to_uuid }}</string>
+        <key>PayloadIdentifier</key>
+        <string>{{ mail.id + '.caldav' }}</string>
+        <key>PayloadType</key>
+        <string>com.apple.caldav.account</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadDisplayName</key>
+        <string>CalDAV {{ mail.sender_address }}</string>
+
+        <key>CalDAVAccountDescription</key>
+        <string>{{ mail.sender_address }}</string>
+
+        <key>CalDAVHostName</key>
+        <string>{{ mail.hosts.caldav }}</string>
+
+        <key>CalDAVUsername</key>
+        <string>{{ mail.credentials.username }}</string>
+
+        <key>CalDAVPassword</key>
+        <string>{{ mail.credentials.password }}</string>
+
+        <key>CalDAVUseSSL</key>
+        <true/>
+      </dict>
+
+{% for smime in mail.smime %}
+    <dict>
+      <key>PayloadUUID</key>
+      <string>{{ (mail.id + '.smime-' + smime.till) | to_uuid }}</string>
+      <key>PayloadIdentifier</key>
+      <string>{{ mail.id + '.smime-' + smime.till }}</string>
+      <key>PayloadDisplayName</key>
+      <string>S/MIME {{ mail.sender_address }} (till {{ smime.till }})</string>
+      <key>PayloadType</key>
+      <string>com.apple.security.pkcs12</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>PayloadContent</key>
+      <data>
+{{ smime.pkcs12 }}
+      </data>
+      <key>Password</key>
+      <string>pass</string>
+    </dict>
+{% endfor %}
+    </array>
+  </dict>
+</plist>

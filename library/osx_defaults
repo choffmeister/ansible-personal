@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source ${1}
+
+current_value=$(defaults read "${domain}" "${key}" 2>/dev/null)
+
+if [ "${current_value}" == "${value_read}" ]; then
+  echo "{\"changed\": false}"
+else
+  defaults write "${domain}" "${key}" ${value_write} >/dev/null 2>/dev/null
+  echo "{\"changed\": true, \"msg\": \"OK\"}"
+fi
+
+exit 0

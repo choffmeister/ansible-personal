@@ -1,0 +1,16 @@
+[core]
+        excludesfile = ~/.gitignore_global
+
+[credential]
+        helper = osxkeychain
+
+[user]
+        name = Christian Hoffmeister
+        email = mail@choffmeister.de
+
+[alias]
+        st = status
+        ll = log --oneline --graph --decorate
+        pf = push --force-with-lease
+        fp = fetch --all --prune
+        pr  = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"

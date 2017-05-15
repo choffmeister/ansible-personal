@@ -1,0 +1,9 @@
+- name: Copy dotfiles
+  copy:
+    src: "dotfiles/{{ item }}"
+    dest: "~/.{{ item }}"
+  with_items:
+    - Xresources
+
+- name: Apply Xresources
+  shell: "xrdb -merge ~/.Xresources"
