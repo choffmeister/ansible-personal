@@ -1,6 +1,6 @@
 - name: Install java
   homebrew_cask:
-    name: "java"
+    name: "java8"
     state: "present"
 
 - name: Install applications from homebrew
@@ -31,25 +31,25 @@
     state: "present"
   with_items:
     - 1password
-    - atom
-    - dash
+    # - atom
+    # - dash
     - docker
     - firefox
     - google-chrome
     - gpgtools
-    - hipchat
     - intellij-idea
     - istat-menus
     - iterm2
     - jeromelebel-mongohub
-    - macdown
+    # - macdown
     - paw
     - slack
     - sourcetree
-    - sublime-text
+    # - sublime-text
     - teamviewer
     - vagrant
     - virtualbox
+    - visual-studio-code
   when: skip_installs|default('no') != 'yes'
 
 - name: Install applications from npm

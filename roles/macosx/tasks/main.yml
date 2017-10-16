@@ -1,11 +1,11 @@
-- include: applications-install.yml
-- include: applications-settings.yml
+- import_tasks: applications-install.yml
+- import_tasks: applications-settings.yml
 
-- include: dotfiles.yml
-- include: profiles.yml
-- include: pgp.yml
-- include: pki.yml
+- import_tasks: dotfiles.yml
+# - import_tasks: profiles.yml
+- import_tasks: pgp.yml
+# - import_tasks: pki.yml
 
-- include: fonts.yml
+- import_tasks: fonts.yml
 
-- include: osx.yml
+- import_tasks: osx.yml

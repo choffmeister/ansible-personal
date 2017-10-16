@@ -9,58 +9,58 @@
     content: "{{ licences.sourcetree }}"
     dest: "~/Library/Application Support/SourceTree/sourcetree.license"
 
-# atom
-- name: Create atom configuration directories
-  file:
-    path: "~/.atom"
-    state: "directory"
-
-- name: Configure atom
-  copy:
-    src: "settings/atom/{{ item }}"
-    dest: "~/.atom/{{ item }}"
-  with_items:
-    - keymap.cson
-    - styles.less
-
-- name: Install atom packages
-  command: "apm install {{ item }}"
-  with_items:
-    - jsonpp
-    - linter
-    - linter-eslint
-    - react
-    - wordcount
-  when: skip_installs|default('no') != 'yes'
-
-# sublime
-- name: Create sublime configuration directories
-  file:
-    path: "~/Library/Application Support/{{ item }}"
-    state: "directory"
-  with_items:
-    - Sublime Text 2
-    - Sublime Text 2/Settings
-    - Sublime Text 2/Packages/User
-
-- name: Install sublime licence
-  copy:
-    content: "{{ licences.sublime }}"
-    dest: "~/Library/Application Support/Sublime Text 2/Settings/License.sublime_license"
-
-- name: Configure sublime user configuration
-  copy:
-    src: settings/sublime/Preferences.sublime-settings
-    dest: "~/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings"
-
-# sbt/maven/gradle
-- name: Create ivy2 directory
-  file:
-    path: "~/.ivy2"
-    state: "directory"
-
-- name: Configure sonatype credentials
-  template:
-    src: "ivy2-sonatype-credentials.j2"
-    dest: "~/.ivy2/.credentials"
-    mode: "0600"
+# # atom
+# - name: Create atom configuration directories
+#   file:
+#     path: "~/.atom"
+#     state: "directory"
+#
+# - name: Configure atom
+#   copy:
+#     src: "settings/atom/{{ item }}"
+#     dest: "~/.atom/{{ item }}"
+#   with_items:
+#     - keymap.cson
+#     - styles.less
+#
+# - name: Install atom packages
+#   command: "apm install {{ item }}"
+#   with_items:
+#     - jsonpp
+#     - linter
+#     - linter-eslint
+#     - react
+#     - wordcount
+#   when: skip_installs|default('no') != 'yes'
+#
+# # sublime
+# - name: Create sublime configuration directories
+#   file:
+#     path: "~/Library/Application Support/{{ item }}"
+#     state: "directory"
+#   with_items:
+#     - Sublime Text 2
+#     - Sublime Text 2/Settings
+#     - Sublime Text 2/Packages/User
+#
+# - name: Install sublime licence
+#   copy:
+#     content: "{{ licences.sublime }}"
+#     dest: "~/Library/Application Support/Sublime Text 2/Settings/License.sublime_license"
+#
+# - name: Configure sublime user configuration
+#   copy:
+#     src: settings/sublime/Preferences.sublime-settings
+#     dest: "~/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings"
+#
+# # sbt/maven/gradle
+# - name: Create ivy2 directory
+#   file:
+#     path: "~/.ivy2"
+#     state: "directory"
+#
+# - name: Configure sonatype credentials
+#   template:
+#     src: "ivy2-sonatype-credentials.j2"
+#     dest: "~/.ivy2/.credentials"
+#     mode: "0600"

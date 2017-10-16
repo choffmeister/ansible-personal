@@ -1,2 +1,2 @@
-- include: ssh.yml
-- include: dotfiles.yml
+- import_tasks: ssh.yml
+- import_tasks: dotfiles.yml
