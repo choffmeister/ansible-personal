@@ -10,4 +10,7 @@
         ll = log --oneline --graph --decorate
         pf = push --force-with-lease
         fp = fetch --all --prune
-        pr  = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+        pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+        ct = "!git add . && git commit -m 'TEMP'"
+        ctf = "!git add . && git commit -m 'fixup! TEMP'"
+        ca = "!git add . && git commit --amend --no-edit"
