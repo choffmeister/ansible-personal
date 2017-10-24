@@ -50,6 +50,7 @@
     - vagrant
     - virtualbox
     - visual-studio-code
+    - vlc
   when: skip_installs|default('no') != 'yes'
 
 - name: Install applications from npm
