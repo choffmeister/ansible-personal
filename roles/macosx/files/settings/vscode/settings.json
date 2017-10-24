@@ -1,0 +1,10 @@
+{
+  "editor.rulers": [120],
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "workbench.colorTheme": "Kimbie Dark",
+  "workbench.iconTheme": "vscode-icons",
+  "window.zoomLevel": 2,
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true
+}

@@ -9,6 +9,20 @@
     content: "{{ licences.sourcetree }}"
     dest: "~/Library/Application Support/SourceTree/sourcetree.license"
 
+# vscode
+- name: Create vscode configuration directories
+  file:
+    path: "~/Library/Application Support/{{ item }}"
+    state: "directory"
+  with_items:
+    - Code
+    - Code/User
+
+- name: Configure sublime user configuration
+  copy:
+    src: settings/vscode/settings.json
+    dest: "~/Library/Application Support/Code/User/settings.json"
+
 # # atom
 # - name: Create atom configuration directories
 #   file:
