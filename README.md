@@ -1,12 +1,12 @@
 # ansible-personal
 
 ```bash
-# bootstrap
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/choffmeister/ansible-personal/master/init.sh)"
+# bootstrap macosx
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/choffmeister/ansible-personal/master/init-macosx.sh)"
 
 # run
-ansible-playbook site.yml
+ansible-playbook site.yml --ask-vault-pass
 
 # run but skip installation packages likes applications and fonts
-ansible-playbook site.yml --extra-vars="skip_installs=yes"
+ansible-playbook site.yml --ask-vault-pass --extra-vars="skip_installs=yes"
 ```

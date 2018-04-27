@@ -1,7 +1,7 @@
 - hosts: all
   roles:
     - role: common
-    # TODO: when
-    #- role: linux
+    - role: linux
+      when: ansible_os_family == "Debian" or ansible_os_family == "Archlinux"
     - role: macosx
       when: ansible_os_family == "Darwin"

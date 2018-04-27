@@ -1,4 +1,5 @@
-xterm*faceName: mono:size=14:antialias=true
+xterm*faceName: Fira Code
+xterm*faceSize: 14
 xterm*saveLines: 2000
 
 ! --- ~/.Xresources ------------------------------------------------------------
